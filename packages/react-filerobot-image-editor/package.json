@@ -1,14 +1,14 @@
 {
-  "name": "react-filerobot-image-editor",
-  "version": "4.9.1",
+  "name": "sp-image-editor",
+  "version": "1.0.0",
   "license": "MIT",
-  "author": "Scaleflex",
-  "homepage": "https://github.com/scaleflex/filerobot-image-editor#readme",
+  "author": "Shivam N Barot",
+  "homepage": "https://github.com/ShivamBarot2602/image-editor#readme",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/scaleflex/filerobot-image-editor#readme"
+    "url": "https://github.com/ShivamBarot2602/image-editor.git"
   },
   "keywords": [
     "Image editing react component",
