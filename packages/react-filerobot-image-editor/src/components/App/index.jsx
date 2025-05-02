@@ -51,6 +51,7 @@ const App = () => {
     theme,
     feedback = {},
     tabId,
+    isSaving,
   } = useStore();
   const {
     loadableDesignState,
@@ -367,7 +368,7 @@ const App = () => {
       ref={pluginRootRef}
       $size={rootSize}
     >
-      {isLoadingGlobally && <Spinner theme={theme} />}
+      {(isSaving || isLoadingGlobally) && <Spinner theme={theme} />}
       {renderContent()}
       <FeedbackPopup />
     </StyledAppWrapper>

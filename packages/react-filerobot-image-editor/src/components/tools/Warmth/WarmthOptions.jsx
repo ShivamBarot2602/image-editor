@@ -3,11 +3,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /** Internal Dependencies */
-import { useFinetune } from 'hooks';
+import { useFinetune, useStore } from 'hooks';
 import restrictNumber from 'utils/restrictNumber';
 import { Warmth as CustomWarmth } from 'custom/finetunes';
 import Slider from 'components/common/Slider';
 import {
+  StyledLabel,
   StyledSliderContainer,
   StyledSliderInput,
   StyledSliderLabel,
@@ -22,6 +23,7 @@ const MAX_VALUE = 200;
 const sliderStyle = { width: 150, padding: 0, margin: 0 };
 
 const WarmthOptions = ({ t }) => {
+  const { config } = useStore();
   const [finetuneProps, setFinetuneProps] = useFinetune(
     CustomWarmth,
     DEFAULT_VALUE,
@@ -48,10 +50,17 @@ const WarmthOptions = ({ t }) => {
           onChange={changeValue}
           style={sliderStyle}
         />
-        <StyledSliderInput
-          value={finetuneProps.warmth ?? DEFAULT_VALUE.warmth}
-          onChange={({ target: { value } }) => changeValue(value)}
-        />
+        {config?.showInputAsLabels ? (
+          <StyledLabel
+            value={finetuneProps.warmth ?? DEFAULT_VALUE.warmth}
+            readOnly
+          />
+        ) : (
+          <StyledSliderInput
+            value={finetuneProps.warmth ?? DEFAULT_VALUE.warmth}
+            onChange={({ target: { value } }) => changeValue(value)}
+          />
+        )}
       </StyledSliderWrapper>
     </StyledSliderContainer>
   );

@@ -4,10 +4,11 @@ import Konva from 'konva';
 import PropTypes from 'prop-types';
 
 /** Internal Dependencies */
-import { useFinetune } from 'hooks';
+import { useFinetune, useStore } from 'hooks';
 import restrictNumber from 'utils/restrictNumber';
 import Slider from 'components/common/Slider';
 import {
+  StyledLabel,
   StyledSliderContainer,
   StyledSliderInput,
   StyledSliderLabel,
@@ -26,6 +27,7 @@ const BrightnessOptions = ({ t }) => {
     Konva.Filters.Brighten,
     DEFAULT_VALUE,
   );
+  const { config } = useStore();
 
   const changeValue = (value) => {
     setFinetuneProps({
@@ -49,10 +51,17 @@ const BrightnessOptions = ({ t }) => {
           onChange={changeValue}
           style={sliderStyle}
         />
-        <StyledSliderInput
-          value={finetuneProps.brightness ?? DEFAULT_VALUE.brightness}
-          onChange={({ target: { value } }) => changeValue(value)}
-        />
+        {config?.showInputAsLabels ? (
+          <StyledLabel
+            value={finetuneProps.brightness ?? DEFAULT_VALUE.brightness}
+            readOnly
+          />
+        ) : (
+          <StyledSliderInput
+            value={finetuneProps.brightness ?? DEFAULT_VALUE.brightness}
+            onChange={({ target: { value } }) => changeValue(value)}
+          />
+        )}
       </StyledSliderWrapper>
     </StyledSliderContainer>
   );

@@ -63,6 +63,16 @@ const CropTransformer = () => {
       height,
     };
 
+    const isCropSame =
+      crop.x === newCrop.x &&
+      crop.y === newCrop.y &&
+      crop.width === newCrop.width &&
+      crop.height === newCrop.height;
+
+    if (isCropSame) {
+      return; // No need to dispatch if nothing changed
+    }
+
     const isOldCropBiggerThanResize =
       crop.width >= resize.width && crop.height >= resize.height;
     if (
@@ -116,7 +126,7 @@ const CropTransformer = () => {
         attrs,
         { ...imageDimensions, abstractX: 0, abstractY: 0 },
         isCustom || isEllipse ? false : getProperCropRatio(),
-        { ...cropSettings, ...restrictions }
+        { ...cropSettings, ...restrictions },
       ),
       true,
     );

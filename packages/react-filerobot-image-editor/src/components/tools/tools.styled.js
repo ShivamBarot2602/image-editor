@@ -54,10 +54,28 @@ const StyledSliderInput = styled(Input)`
   }
 `;
 
+const StyledLabel = styled(Input)`
+  display: inline-block;
+  width: 40px;
+  height: 28px;
+  padding: 6px 2px;
+  margin-left: 10px;
+  border: none;
+  background-color: white !important;
+
+  .SfxInput-Base {
+    text-align: center;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+  }
+`;
+
 export {
   StyledHSVOptions,
   StyledSliderContainer,
   StyledSliderLabel,
   StyledSliderWrapper,
   StyledSliderInput,
+  StyledLabel,
 };

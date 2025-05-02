@@ -190,6 +190,42 @@ const config = {
         ratio: toPrecisedFloat(21 / 9),
         icon: CropCinemaScope, // optional
       },
+      {
+        titleKey: 'Square 1:1',
+        descriptionKey: '1:1',
+        ratio: 1,
+        // icon: CropCinemaScope, // optional
+      },
+      {
+        titleKey: 'Portrait 4:5',
+        descriptionKey: '4:5',
+        ratio: 4 / 5,
+        // icon: CropClassicTv, // optional
+      },
+      {
+        titleKey: '16:9',
+        descriptionKey: '16:9',
+        ratio: 16 / 9,
+        // icon: CropClassicTv, // optional
+      },
+      {
+        titleKey: '4:3',
+        descriptionKey: '4:3',
+        ratio: 4 / 3,
+        // icon: CropClassicTv, // optional
+      },
+      {
+        titleKey: '9:16',
+        descriptionKey: '9:16',
+        ratio: 9 / 16,
+        // icon: CropCinemaScope, // optional
+      },
+      {
+        titleKey: 'custom',
+        ratio: 'custom',
+        // icon: Custom,
+        hide: ({ lockCropAreaAt } = {}) => lockCropAreaAt,
+      },
     ],
     presetsFolders: cropFolderPresets,
   },
@@ -355,6 +391,7 @@ const config = {
   // tabsIds: [TABS.ADJUST, TABS.WATERMARK],
   // savingPixelRatio: 4,
   previewPixelRatio: window.devicePixelRatio * 4,
+  // showInputAsLabels: true, // displays HSV and other filter slider value as label instead of inputs.
   // defaultTabId: TABS.ADJUST,
   // defaultToolId: TOOLS.CROP,
   // showBackButton: true,

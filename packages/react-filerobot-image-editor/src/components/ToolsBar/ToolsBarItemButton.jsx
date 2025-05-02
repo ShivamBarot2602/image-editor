@@ -31,7 +31,12 @@ const ToolsBarItemButton = ({
       aria-selected={isSelected}
       isPhoneScreen={isPhoneScreen}
     >
-      <Icon size={isPhoneScreen ? 20 : 16} />
+      {Icon &&
+        (typeof Icon === 'string' ? (
+          <span dangerouslySetInnerHTML={{ __html: Icon }} />
+        ) : (
+          <Icon size={isPhoneScreen ? 20 : 16} />
+        ))}
       {label && (
         <StyledToolsBarItemButtonLabel isPhoneScreen={isPhoneScreen}>
           {label}
@@ -47,6 +52,7 @@ ToolsBarItemButton.defaultProps = {
   id: undefined,
   children: null,
   label: '',
+  Icon: undefined,
 };
 
 ToolsBarItemButton.propTypes = {
@@ -57,10 +63,10 @@ ToolsBarItemButton.propTypes = {
   className: PropTypes.string.isRequired,
   isSelected: PropTypes.bool,
   Icon: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.func,
-    PropTypes.instanceOf(Object),
-  ]).isRequired,
+    PropTypes.elementType,
+    PropTypes.string,
+    PropTypes.instanceOf(HTMLElement),
+  ]),
 };
 
 export default memo(ToolsBarItemButton);

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Konva from 'konva';
 
 /** Internal Dependencies */
-import { useFinetune, usePhoneScreen } from 'hooks';
+import { useFinetune, usePhoneScreen, useStore } from 'hooks';
 import Slider from 'components/common/Slider';
 import {
   StyledHSVOptions,
@@ -12,6 +12,7 @@ import {
   StyledSliderLabel,
   StyledSliderInput,
   StyledSliderWrapper,
+  StyledLabel,
 } from '../tools.styled';
 
 const DEFAULT_VALUE = {
@@ -30,6 +31,7 @@ const sliderStyle = { padding: 0, margin: 0 };
 const isPhoneScreen = usePhoneScreen();
 
 const HSVOptions = ({ t }) => {
+  const { config } = useStore();
   const [finetuneProps, setFinetuneProps] = useFinetune(
     Konva.Filters.HSV,
     DEFAULT_VALUE,
@@ -57,10 +59,18 @@ const HSVOptions = ({ t }) => {
             onChange={(val) => changeValue('hue', val)}
             style={sliderStyle}
           />
-          <StyledSliderInput
-            value={finetuneProps.hue ?? DEFAULT_VALUE.hue}
-            onChange={({ target: { value } }) => changeValue('hue', value)}
-          />
+          {config?.showInputAsLabels ? (
+            <StyledLabel
+              value={finetuneProps.hue ?? DEFAULT_VALUE.hue}
+              // onChange={({ target: { value } }) => changeValue('hue', value)}
+              readOnly
+            />
+          ) : (
+            <StyledSliderInput
+              value={finetuneProps.hue ?? DEFAULT_VALUE.hue}
+              onChange={({ target: { value } }) => changeValue('hue', value)}
+            />
+          )}
         </StyledSliderWrapper>
       </StyledSliderContainer>
       <StyledSliderContainer className="FIE_saturation-option-wrapper">
@@ -77,12 +87,19 @@ const HSVOptions = ({ t }) => {
             onChange={(val) => changeValue('saturation', val)}
             style={sliderStyle}
           />
-          <StyledSliderInput
-            value={finetuneProps.saturation ?? DEFAULT_VALUE.saturation}
-            onChange={({ target: { value } }) =>
-              changeValue('saturation', value)
-            }
-          />
+          {config?.showInputAsLabels ? (
+            <StyledLabel
+              value={finetuneProps.saturation ?? DEFAULT_VALUE.saturation}
+              readOnly
+            />
+          ) : (
+            <StyledSliderInput
+              value={finetuneProps.saturation ?? DEFAULT_VALUE.saturation}
+              onChange={({ target: { value } }) =>
+                changeValue('saturation', value)
+              }
+            />
+          )}
         </StyledSliderWrapper>
       </StyledSliderContainer>
       <StyledSliderContainer className="FIE_value-option-wrapper">
@@ -99,10 +116,17 @@ const HSVOptions = ({ t }) => {
             onChange={(val) => changeValue('value', val)}
             style={sliderStyle}
           />
-          <StyledSliderInput
-            value={finetuneProps.value ?? DEFAULT_VALUE.value}
-            onChange={({ target: { value } }) => changeValue('value', value)}
-          />
+          {config?.showInputAsLabels ? (
+            <StyledLabel
+              value={finetuneProps.value ?? DEFAULT_VALUE.value}
+              readOnly
+            />
+          ) : (
+            <StyledSliderInput
+              value={finetuneProps.value ?? DEFAULT_VALUE.value}
+              onChange={({ target: { value } }) => changeValue('value', value)}
+            />
+          )}
         </StyledSliderWrapper>
       </StyledSliderContainer>
     </StyledHSVOptions>

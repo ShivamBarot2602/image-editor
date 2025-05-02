@@ -17,7 +17,7 @@ const ConfirmationModal = ({ children, isReset }) => {
     dispatch,
     isResetted = true,
     haveNotSavedChanges,
-    config: { onClose },
+    config: { onClose, avoidChangesNotSavedAlertOnLeave },
   } = useStore();
 
   const [isModalOpened, setIsModalOpened] = useState(false);
@@ -49,10 +49,20 @@ const ConfirmationModal = ({ children, isReset }) => {
     dispatchReset();
   };
 
+  const checkForModal = () => {
+    if (avoidChangesNotSavedAlertOnLeave) {
+      dispatchReset();
+      if (!isReset) onClose(CLOSING_REASONS.CLOSE_BUTTON, haveNotSavedChanges);
+      return;
+    }
+
+    openModal();
+  };
+
   return (
     <>
       {React.cloneElement(children, {
-        onClick: isResetted ? closeWithReason : openModal,
+        onClick: isResetted ? closeWithReason : checkForModal,
       })}
 
       {isModalOpened && (

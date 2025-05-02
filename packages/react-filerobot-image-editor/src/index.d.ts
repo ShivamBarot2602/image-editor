@@ -330,6 +330,7 @@ export interface FilerobotImageEditorConfig {
   avoidChangesNotSavedAlertOnLeave?: boolean;
   loadableDesignState?: imageDesignState;
   showBackButton?: boolean;
+  showInputAsLabels?: boolean;
   savingPixelRatio: number;
   previewPixelRatio: number;
   moreSaveOptions?: saveOption[];

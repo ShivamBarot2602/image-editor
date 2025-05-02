@@ -13,8 +13,9 @@ const reset = (state, payload) => {
     true,
   );
 
+  const { dynamicCropToolId, ...restState } = state;
   return {
-    ...state,
+    ...restState,
     ...resettedDesignState,
     zoom: {
       factor: DEFAULT_ZOOM_FACTOR,
