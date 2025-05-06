@@ -70,6 +70,7 @@ const App = () => {
     noCrossOrigin,
     resetOnImageSourceChange,
     Crop,
+    customSpinner,
   } = config;
 
   const showTabsDrawer = window.matchMedia('(max-width: 760px)').matches;
@@ -368,7 +369,8 @@ const App = () => {
       ref={pluginRootRef}
       $size={rootSize}
     >
-      {(isSaving || isLoadingGlobally) && <Spinner theme={theme} />}
+      {(isSaving || isLoadingGlobally) &&
+        (customSpinner || <Spinner theme={theme} />)}
       {renderContent()}
       <FeedbackPopup />
     </StyledAppWrapper>

@@ -370,6 +370,7 @@ export interface FilerobotImageEditorConfig {
   resetOnImageSourceChange?: boolean;
   backgroundColor?: string;
   backgroundImage?: HTMLImageElement;
+  customSpinner?: React.ReactNode;
 }
 
 declare const FilerobotImageEditor: FunctionComponent<FilerobotImageEditorConfig>;
