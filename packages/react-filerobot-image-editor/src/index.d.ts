@@ -133,6 +133,7 @@ type cropPresetItem = {
   icon?: string | HTMLElement | FunctionComponent;
   disableManualResize?: boolean;
   noEffect?: boolean;
+  id: string | number;
 };
 
 type cropPresetGroup = {

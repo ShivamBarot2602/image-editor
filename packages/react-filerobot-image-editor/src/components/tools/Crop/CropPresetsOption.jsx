@@ -96,6 +96,7 @@ const CropPresetsOption = ({ anchorEl, onClose }) => {
     icon: Icon,
     disableManualResize,
     noEffect,
+    index,
   }) =>
     groups ? (
       <CropPresetGroupsList
@@ -110,7 +111,7 @@ const CropPresetsOption = ({ anchorEl, onClose }) => {
       />
     ) : (
       <CropPresetItem
-        key={ratio}
+        key={`${ratio}-${index}`}
         ratio={ratio ?? toPrecisedFloat(width / height)}
         titleKey={titleKey}
         t={t}
@@ -172,7 +173,9 @@ const CropPresetsOption = ({ anchorEl, onClose }) => {
         }}
         maxHeight="100%"
       >
-        <StyledMenu>{allPresets.map(renderPreset)}</StyledMenu>
+        <StyledMenu>
+          {allPresets.map((e, index) => renderPreset({ ...e, index }))}
+        </StyledMenu>
       </Menu>
     </>
   );

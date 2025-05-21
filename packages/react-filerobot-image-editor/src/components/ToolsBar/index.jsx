@@ -70,7 +70,7 @@ const ToolsBar = ({ isPhoneScreen, dynamicButtons, upperToolbar }) => {
       return CustomCropVariants.map((item) => (
         <CustomCropButtons
           customKey={`custom-crop-${item.titleKey}`}
-          key={`${item.titleKey}-index`}
+          key={`${item.titleKey}-${item.id}`}
           isSelected={dynamicCropToolId === item.titleKey}
           item={item}
           t={t}
