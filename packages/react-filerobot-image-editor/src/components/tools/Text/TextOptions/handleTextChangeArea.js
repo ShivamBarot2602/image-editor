@@ -133,28 +133,31 @@ const activateTextChange = (
   }
 
   textarea.addEventListener('keydown', (event) => {
-    // hide on enter
-    // but don't hide on shift + enter
-    if (event.key === 'Enter' && !event.shiftKey) {
-      const textContent = textarea.value;
-      deactivateTextChange();
-      editFinishCallback(textContent);
-    }
     // on esc do not set value back to node
     if (event.key === 'Escape') {
       deactivateTextChange();
     }
   });
 
-  textarea.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' || event.key === 'Escape') {
-      return;
-    }
-    const scale = textNode.getAbsoluteScale().x;
-    setTextareaWidth(textNode.width() * scale);
-    textarea.style.height = 'auto';
-    textarea.style.height = `${textarea.scrollHeight + textNode.fontSize()}px`;
+  textarea.addEventListener('blur', () => {
+    // hide on enter
+    // but don't hide on shift + enter
+    // if (event.key === 'Enter' && !event.shiftKey) {
+    const textContent = textarea.value;
+    deactivateTextChange();
+    editFinishCallback(textContent);
+    // }
   });
+
+  // textarea.addEventListener('blur', (event) => {
+  //   if (event.key === 'Enter' || event.key === 'Escape') {
+  //     return;
+  //   }
+  //   const scale = textNode.getAbsoluteScale().x;
+  //   setTextareaWidth(textNode.width() * scale);
+  //   textarea.style.height = 'auto';
+  //   textarea.style.height = `${textarea.scrollHeight + textNode.fontSize()}px`;
+  // });
 
   if (window) {
     setTimeout(() => {

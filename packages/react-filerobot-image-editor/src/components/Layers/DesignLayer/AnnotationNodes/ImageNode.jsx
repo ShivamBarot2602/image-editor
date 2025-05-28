@@ -6,6 +6,7 @@ import { Image } from 'react-konva';
 /** Internal Dependencies */
 import loadImage from 'utils/loadImage';
 import nodesCommonPropTypes from '../nodesCommonPropTypes';
+import KonvaSpinner from './ImageSpinner';
 
 const ImageNode = ({
   id,
@@ -30,18 +31,44 @@ const ImageNode = ({
   ...otherProps
 }) => {
   const [imgElement, setImgElement] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
+    let isMounted = true;
     if (typeof image === 'string') {
-      loadImage(image).then(setImgElement);
+      loadImage(image).then((loadedImage) => {
+        if (isMounted) {
+          setImgElement(loadedImage);
+          setLoading(false);
+        }
+      });
+    } else {
+      setLoading(false);
     }
+    return () => {
+      isMounted = false;
+    };
   }, [image]);
 
   const isImgElement = image instanceof HTMLImageElement;
-  if (!isImgElement && !imgElement) {
-    return null;
+  const finalImg = isImgElement ? image : imgElement;
+
+  const spinnerRadius = Math.max(10, Math.min(width, height) * 0.1);
+
+  if (loading) {
+    return (
+      <KonvaSpinner
+        x={x + width / 2}
+        y={y + height / 2}
+        radius={spinnerRadius}
+        strokeWidth={spinnerRadius * 0.1}
+        color="#555"
+        speed={5}
+      />
+    );
   }
 
-  const finalImg = isImgElement ? image : imgElement;
+  if (!finalImg) return null;
 
   return (
     <Image
@@ -65,7 +92,6 @@ const ImageNode = ({
       opacity={opacity}
       {...otherProps}
       {...annotationEvents}
-      {...otherProps}
     />
   );
 };
